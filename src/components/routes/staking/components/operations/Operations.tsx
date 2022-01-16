@@ -61,14 +61,24 @@ const Operations = () => {
       <div className={classes.inputs}>
         <div className={classes.inputWrapper}>
           <p>Enter the amount</p>
-          <input type="number" onChange={onFromInputChange} value={fromValue} />
+          <input
+            type="number"
+            className="from-input"
+            onChange={onFromInputChange}
+            value={fromValue}
+          />
         </div>
         <div className={classes.separator}>
           <img src={linkImg} alt="" />
         </div>
         <div className={classes.inputWrapper}>
           <p>Balance in 1 year</p>
-          <input type="number" onChange={onToInputChange} value={toValue} />
+          <input
+            type="number"
+            className="to-input"
+            onChange={onToInputChange}
+            value={toValue}
+          />
         </div>
       </div>
       <div className={classes.quickSelector}>
@@ -88,7 +98,7 @@ const Operations = () => {
         <Transactions list={transactionsList} />
         <input
           type="button"
-          className={classes.cta}
+          className={`cta-button ${classes.cta}`}
           value="STAKE ATOM"
           onClick={onStakeClick}
         />

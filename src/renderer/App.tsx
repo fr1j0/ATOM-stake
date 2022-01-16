@@ -1,33 +1,35 @@
+import { useEffect } from 'react';
 import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
-import { createUseStyles } from 'react-jss';
+import { useTour } from '@reactour/tour';
 import MainLayout from 'components/layout/main';
 import Staking from 'components/routes/staking';
+import useStyles from './styles';
 import './app.css';
-
-const useStyles = createUseStyles({
-  '@global': {
-    body: {
-      margin: 0,
-      overflowX: 'hidden',
-      fontFamily: 'Roboto',
-      color: '#fff',
-      backgroundColor: '#27292b',
-      '&::-webkit-scrollbar': {
-        display: 'none',
-      },
-    },
-    input: {
-      '&:focus': {
-        outline: 'none',
-      },
-    },
-  },
-});
 
 // App entry point
 
 const App = () => {
   const classes = useStyles();
+  const { steps, setIsOpen, isOpen, currentStep, setCurrentStep } = useTour();
+
+  useEffect(() => {
+    const delay = 3000;
+    let timer: NodeJS.Timeout;
+    if (isOpen) {
+      if (currentStep > steps.length) {
+        setIsOpen(false);
+      } else {
+        timer = setTimeout(() => setCurrentStep((s) => s + 1), delay);
+      }
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isOpen, currentStep, setCurrentStep, steps.length, setIsOpen]);
+
+  useEffect(() => {
+    setIsOpen(true);
+  }, [setIsOpen]);
 
   return (
     <Router>
