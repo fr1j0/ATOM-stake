@@ -1,4 +1,4 @@
-<p>ATOM stake desktop app</p>
+<p>ATOM stake desktop Electron app</p>
 
 <br>
 
